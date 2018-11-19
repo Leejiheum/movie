@@ -1,0 +1,303 @@
+@charset "UTF-8";
+/* 무비 파인더 CSS */
+
+.sect-finder {
+    width: 1125px;
+    height: 400px;
+    background: #212121;
+    position: relative;
+    margin: 16 auto;
+    font-size: 100%;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    word-break: break-all;
+}
+
+.sect-finder h3 {
+	height: auto;
+	margin: 0;
+	padding: 15px 0 10px;
+	background: none;
+	line-height: 1.2;
+}
+
+.sect-finder h3 img {
+	background: none;
+}
+
+.sect-finder table {
+	border-collapse: collapse;
+}
+
+.sect-finder table .finder-col01 {
+	width: 107px;
+}
+
+.sect-finder th, .sect-finder td {
+	padding: 11px 0;
+	border-top: 1px solid #3e484f;
+	color: #fdfcf0;
+	font-size: 12px;
+	font-family: 'NanumBarunGothicBold';
+	vertical-align: middle;
+}
+
+.sect-finder th {
+	font-size: 14px;
+	padding-left: 34px;
+	text-align: left;
+}
+
+.sect-finder td>strong {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.sect-finder td ui:after {
+	content: '';
+	clear: both;
+	display: block;
+}
+
+.sect-finder td li {
+	float: left;
+	width: 13%;
+}
+
+.sect-finder td ul:first-child li:first-child {
+	width: 13%;
+	margin: 0;
+}
+
+.sect-finder td .collage {
+	color: #FF8D1B;
+	width: 86%
+}
+
+.sect-finder td label {
+	font-size:12px;
+	display: inline-block;
+	padding: 1px 0;
+}
+
+.sect-finder .maketype+td li {
+	width: auto;
+	margin-right: 28px
+}
+
+.sect-finder .gradetype+td li {
+	width: auto;
+	margin-right: 35px;
+}
+
+.sect-finder .wrap-submit {
+	padding-top: 10px;
+	text-align: center;
+}
+
+.sect-finder .wrap-submit>button {
+	margin: 0 3px;
+}
+
+.sect-finder .wrap-submit .round.red:before, .sect-finder .wrap-submit .round.red:after,
+	.sect-finder .wrap-submit .round.red>*:before, .sect-finder .wrap-submit .round.red>*:after
+	{
+	background-color: #29353d;
+}
+
+.sect-finder .wrap-submit .round.inred:before, .sect-finder .wrap-submit .round.inred:after,
+	.sect-finder .wrap-submit .round.inred>*:before, .sect-finder .wrap-submit .round.inred>*:after
+	{
+	background-color: #29353d;
+}
+
+.sect-finder .yeartype+td ul {
+	margin: 0 -21px 0 -21px;
+}
+
+.sect-finder .yeartype+td li {
+	position: relative;
+	width: 41px;
+	padding-top: 10px;
+	color: #d3d3cb;
+	font-size: 11px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-align: center;
+}
+
+.sect-finder th.yeartype+td li:first-child {
+	width: 38px;
+}
+
+.sect-finder .yeartype+td li:after {
+	content: '';
+	position: absolute;
+	top: 11px;
+	left: 50%;
+	width: 1px;
+	height: 3px;
+	background: #d3d4cc;
+}
+
+.sect-finder .slider-range {
+	width: 328px;
+	margin-right: 30px;
+}
+
+.sect-finder dl {
+	
+}
+
+.sect-finder dt, .sect-finder dd {
+	display: inline-block;
+	padding: 11px 0;
+	border-top: 1px solid #3e484f;
+	color: #fdfcf0;
+	font-size: 11px;
+	font-family: 'NanumBarunGothicBold';
+}
+
+.sect-finder dt:first-child, .sect-finder dt:first-child+dd {
+	border-top: none;
+}
+
+.sect-finder dt {
+	width: 105px;
+	padding-left: 32px;
+	line-height: 19px;
+	vertical-align: top;
+}
+
+.sect-finder dd {
+	width: 840px
+}
+
+.sect-finder dd strong {
+	display: block;
+}
+
+.sect-finder dd label {
+	display: inline-block;
+	width: 98px;
+}
+
+select {
+    font-size: 12px;
+    font-family: Verdana;
+    line-height: 27px;
+    height: 29px;
+    padding: 3px 5px;
+    border: 1px solid #b4b3aa;
+    vertical-align: middle;
+    -webkit-appearance: menulist;
+    box-sizing: border-box;
+    align-items: center;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    color: black;
+    background-color: white;
+    cursor: default;
+    border-radius: 0px;
+}
+input[type='text'] {
+display: inline-block;
+    height: auto;
+    line-height: 22px;
+    padding-left: 10px;
+    border: 1px solid #b5b5b5;
+        color: #666;
+    font-family: 'NanumBarunGothic', '맑은 고딕', '돋움', Dotum, sans-serif;
+	    font-size: 12px;
+	vertical-align: middle;
+	overflow: visible;
+}
+ol, ul {
+    list-style: none;
+}
+input[type="checkbox" i]{
+	margin: 3px 3px 3px 4px;
+    font-size: 12px;
+    line-height: 1.2;
+    color: #666;
+    font-family: 'NanumBarunGothic', '맑은 고딕', '돋움', Dotum, sans-serif;
+    vertical-align: middle;
+    overflow: visible;
+}
+/*  */
+.sect-finder .yeartype + td li {
+    position: relative;
+    width: 41px;
+    padding-top: 10px;
+    color: #d3d3cb;
+    font-size: 9px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+}
+
+/* // */
+/* 레인지 슬라이더 */
+.slider-range{ display:inline-block; height:1px !important; margin:10px 0; border-top:1px solid #666666; border-bottom:1px solid #666666; background:#101518 !important; vertical-align:top;}
+*+html .slider-range{ display:inline;}
+.slider-range .ui-slider-range{ top:-1px !important; height:3px !important; background:#FF8D1B !important;}
+.slider-range .ui-slider-handle{top:-10px !important;width:22px !important;height:22px !important;margin-left:-11px !important;border:none !important;background:url('/Resource/images/sprite/sprite_btn.png') no-repeat !important;font:0/0 a;zoom:1;}
+.slider-range .ui-slider-handle:hover{ cursor:pointer;}
+*+html .sect-finder .slider-range{ display:inline;}
+/* input box*/
+.wrap-submit button{
+	border: 1px;
+	color: #fff;
+    display: inline-block;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #FF8D1B;
+    text-align: center;
+    padding: 6px 30px;
+    font-weight: bold;
+}
+.wrap-submit button:focus{
+	outline:none;
+}
+.wrap-submit button:hover{
+	background:#212121;
+}
+@media (max-width: 1200px) {
+.sect-finder {
+    width: 925px;
+    height: 420px;
+	}
+.sect-finder .wrap-submit {
+	padding-top: 15px;
+	}
+}
+@media (min-width: 1200px) {
+.sect-finder {
+    width: 1125px;
+    }
+}
+@media (max-width : 991px) {
+	.sect-finder {
+		width: 735px;
+		height: 490px;
+	}
+	.sect-finder td li {
+	width : 16%;
+	}
+	.sect-finder .maketype+td li {
+	margin-right:37px;
+	}
+	.sect-finder .maketype+td li {
+	margin-right: 10px;
+	}
+	.sect-finder .wrap-submit {
+	padding-top: 35px;
+	}
+	.sect-finder td .collage {
+	width: 80%;
+	margin-left: 19px;
+	}
+@media (min-width : 991px) {
+	.sect-finder {
+		width: 735px;
+	}
+}

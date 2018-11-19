@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.UserMapper">
+	<!-- insert문을 사용할때는 insert태그 -->
+	<!-- UserMapper의 함수명을 입력 -->
+	<!-- parameterType로 매개변수를 받아준다. UserDTO를 사용할 수 있는 이유는
+	sql-mapper-config.xml에서 DTO를 등록을 해주었다.-->
+	<insert id="insertUserDTO" parameterType="UserDTO">
+		INSERT INTO USER_TB
+		( 
+			USER_ID,
+			USER_PW,
+			USER_NAME,
+			USER_MAIL,
+			USER_PHONE,
+			USER_ACTIVE,
+			REG_ID,
+			REG_DATE,
+			CHG_ID,
+			CHG_DATE
+		)
+		VALUES
+		(
+			#{USER_ID},
+			#{USER_PW},
+			#{USER_NAME},
+			#{USER_MAIL},
+			#{USER_PHONE},
+			0,
+			#{USER_ID},
+			SYSDATE,
+			#{USER_ID},
+			SYSDATE
+		)
+	</insert>
+	
+	<select id="getUserList" resultType="UserDTO">
+	SELECT USER_NO,
+				ID,
+				PASSWORD,
+				NAME,
+				AGE
+	FROM USER_TB
+	</select>
+	
+	<select id="getUserDetail" parameterType="string"  resultType="UserDTO">
+	SELECT USER_NO,
+				ID,
+				PASSWORD,
+				NAME,
+				AGE
+	FROM USER_TB
+	WHERE USER_NO =#{userNo} <!-- 매겨번수로 넘겨받는 #{}를 사용한다. -->	
+	</select>
+	
+ 	<!-- <delete id="deleteUserDTO" parameterType="string"  resultType="UserDTO"> -->
+ 	<delete id="deleteUserDTO" parameterType="string">
+	DELETE FROM USER_TB
+	WHERE USER_NO =#{userNo}
+	</delete>
+	
+	<update id="updateUser" parameterType="UserDTO">
+	UPDATE USER_TB
+	SET
+		ID=#{id},<!-- 1111 -->
+		PASSWORD=#{password}, <!-- 2222 -->
+		NAME=#{name}, <!-- 3333 -->
+		AGE=#{age}<!-- 4444 -->
+		WHERE USER_NO = #{user_no}<!-- 5555 -->
+	</update>
+	
+	<!-- 로그인 SQL -->
+	<select id="getUserLogin" parameterType="UserDTO" resultType="UserDTO">
+	SELECT
+		USER_ID,
+		USER_PW,
+		USER_NAME,
+		USER_MAIL,
+		USER_PHONE,
+		USER_ACTIVE,
+		REG_ID,
+		REG_DATE,
+		CHG_ID,
+		CHG_DATE
+	FROM USER_TB
+	WHERE USER_ID=#{USER_ID}
+	AND USER_PW=#{USER_PW} <!-- 2222 -->
+	</select>
+	<!-- //로그인 SQL -->
+	
+	<select id="getIdChk" parameterType="UserDTO" resultType="string">
+	SELECT COUNT(USER_ID)
+	FROM USER_TB
+	WHERE USER_ID = #{USER_ID}
+	</select>
+	
+	<select id="getId" parameterType="UserDTO" resultType="string">
+	SELECT USER_ID
+	FROM USER_TB
+	WHERE USER_NAME = #{USER_NAME}
+	AND USER_PHONE = #{USER_PHONE}
+	</select>
+	<select id="getPw" parameterType="UserDTO" resultType="string">
+	SELECT USER_ID, USER_PW
+	FROM USER_TB
+	WHERE USER_ID = #{USER_ID}
+	AND USER_NAME = #{USER_NAME}
+	AND USER_MAIL = #{USER_MAIL}
+	AND USER_PHONE = #{USER_PHONE}
+	</select>
+	
+		<select id="getSearchList" parameterType="UserDTO"  resultType="UserDTO">
+	SELECT USER_NO,
+				ID,
+				PASSWORD,
+				NAME,
+				AGE
+	FROM USER_TB
+	WHERE ID =#{id} <!-- 매겨번수로 넘겨받는 #{}를 사용한다. -->	
+	</select>
+	
+	
+</mapper>

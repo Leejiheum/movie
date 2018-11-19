@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.SubmitMapper">
+	<!-- insert문을 사용할때는 insert태그 -->
+	<!-- UserMapper의 함수명을 입력 -->
+	<!-- parameterType로 매개변수를 받아준다. UserDTO를 사용할 수 있는 이유는
+	sql-mapper-config.xml에서 DTO를 등록을 해주었다.-->
+	<insert id="insertSubmitDTO" parameterType="SubmitDTO">
+		INSERT INTO MOVIEINFO2
+		( 
+			DOCID,
+			MOVIEID,
+			MOVIESEQ,
+			TITLE,
+			TITLEENG,
+			DIRECTORNM,
+			DIRECTORID,
+			ACTORNM,
+			ACTORID,
+			NATION,
+			COMPANY,
+			PRODYEAR,
+			PLOT,
+			RUNTIME,
+			GENRE,
+			KMDBURL,
+			TYPE,
+			RATINGGRADE,
+			RELEASEDATE,
+			KEYWORDS,
+			STAFFNM,
+			STAFFROLEGROUP,
+			STAFFROLE,
+			STAFFID,
+			VODCLASS,
+			VODURL,
+			SOUNDTRACK
+		)
+		VALUES
+		(
+			#{docid},
+			#{movieId},
+			#{movieSeq},
+			#{title},
+			#{titleEng},
+			#{directorNm},
+			#{directorId},
+			#{actorNm},
+			#{actorId},
+			#{nation},
+			#{company},
+			#{prodYear},
+			#{plot},
+			#{runtime},
+			#{genre},
+			#{kmdbUrl},
+			#{type},
+			#{ratingGrade},
+			#{releaseDate},
+			#{keywords},
+			#{StaffNm},
+			#{staffRoleGroup},
+			#{StaffRole},
+			#{StaffId},
+			#{vodClass},
+			#{vodUrl},
+			#{soundtrack}
+		)
+	</insert>
+</mapper>

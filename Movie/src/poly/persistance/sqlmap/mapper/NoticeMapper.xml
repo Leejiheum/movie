@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.NoticeMapper">
+
+	<select id="getNoticeList" resultType="NoticeDTO">
+SELECT NOTICE_SEQ,
+			TITLE,
+			NOTICE_YN,
+			USER_ID,
+			REG_ID,
+			REG_DT
+FROM
+		    NOTICE_TB
+ORDER BY 
+			NOTICE_SEQ DESC
+	</select>
+	
+		<select id="getNoticeDetail" parameterType="string" resultType="NoticeDTO">
+SELECT NOTICE_SEQ,
+			TITLE,
+			NOTICE_YN,
+			CONTENTS
+FROM
+		    NOTICE_TB
+		    WHERE NOTICE_SEQ = #{Notice_seq}
+	</select>
+	
+	<delete id="deleteNoticeDTO" parameterType="string">
+	DELETE FROM NOTICE_TB
+	WHERE NOTICE_SEQ=#{Notice_seq}
+	</delete>
+	
+	<update id="updateNotice" parameterType="NoticeDTO">
+	UPDATE NOTICE_TB
+	SET
+		TITLE=#{title},
+		<!-- NOTICE_YN, -->
+		CONTENTS=#{contents},
+		CHG_DT=SYSDATE
+		WHERE NOTICE_SEQ = #{notice_seq}
+	</update>
+	<insert id="insertNoticeDTO" parameterType="NoticeDTO">
+	
+	INSERT INTO NOTICE_TB
+	(
+		NOTICE_SEQ,
+		TITLE,
+		NOTICE_YN,
+		CONTENTS,
+		USER_ID,
+		READ_CNT,
+		REG_ID,
+		REG_DT,
+		CHG_ID,
+		CHG_DT
+	)
+	VALUES
+	(
+		NOTICE_SEQ.NEXTVAL,
+		#{title},
+		 'N',
+		#{contents},
+		#{user_id},
+		1,
+		#{user_id},
+		SYSDATE,
+		#{user_id},
+		SYSDATE
+	)	
+	</insert>
+	
+	
+</mapper>
