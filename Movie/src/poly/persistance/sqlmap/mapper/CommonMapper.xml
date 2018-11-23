@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.CommonMapper">
+	<!-- insert문을 사용할때는 insert태그 -->
+	<!-- UserMapper의 함수명을 입력 -->
+	<!-- parameterType로 매개변수를 받아준다. UserDTO를 사용할 수 있는 이유는
+	sql-mapper-config.xml에서 DTO를 등록을 해주었다.-->
+	<select id="getCinemaList" resultType="CommonDTO" parameterType="CommonDTO">
+	SELECT
+		SIDO,
+		SIGUNGU,
+		CINEMA_NAME,
+		BRAND,
+		CON_NUMBER,
+		ADDRESS,
+		URL,
+		NO
+	FROM CINEMA_DB
+  	WHERE SIDO=#{SIDO} 
+	<!-- AND SIGUNGU=#{SIGUNGU} -->
+	AND SIGUNGU LIKE '%' ||  #{SIGUNGU} || '%'
+	</select>
+	<select id="getCinemaListDetail_1" resultType="CommonDTO" parameterType="CommonDTO">
+	SELECT
+		SIDO,
+		SIGUNGU,
+		CINEMA_NAME,
+		BRAND,
+		CON_NUMBER,
+		ADDRESS,
+		URL,
+		NO
+	FROM CINEMA_DB
+  	WHERE NO=#{NO} 
+	</select>
+</mapper>

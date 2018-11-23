@@ -84,7 +84,7 @@ $(function(){
 						contents+="<tr class='findtest' data-no='"+value.no+"' data-no-seq='"+value.no+"' rock-asd='"+value.no+"' >";
 /* 						contents+="<td><a style='color:#FF8D1B; font-weight:bold;'href='cienma/sidosearchDetail.do?no="+value.no+"'>"+value.cinema_NAME+"</a></td>"; */
 						contents+="<td style='color:#FF8D1B; font-weight:bold;'>"+value.cinema_NAME+"</td>";
-						contents+="<td>"+value.address+"</td>";
+						contents+="<td class='hoxy'>"+value.address+"</td>";
 						contents+="</tr>";
 					}); 
 					$('#showFindTable').html(contents);
@@ -96,6 +96,15 @@ $(function(){
 </script>
  <script>
     $(function(){
+		var mapContainer = document.getElementById('map'), //지도를 표시할 div
+		/* var mapContainer = document.getElementsByClassName('map'), //지도를 표시할 div */
+		    mapOption = {
+		        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };  
+
+		// 지도를 생성합니다    
+		var map = new daum.maps.Map(mapContainer, mapOption); 
     	    	
     	$(document).on( "click", ".findtest", function(){
     		var str = ""
@@ -141,15 +150,6 @@ $(function(){
 		
 		var adrressVal = $('.adrressVal').val();
 		var nameVal = $('.nameVal').val();
-		var mapContainer = document.getElementById('map'), //지도를 표시할 div
-		/* var mapContainer = document.getElementsByClassName('map'), //지도를 표시할 div */
-		    mapOption = {
-		        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };  
-
-		// 지도를 생성합니다    
-		var map = new daum.maps.Map(mapContainer, mapOption); 
 
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new daum.maps.services.Geocoder();
@@ -183,6 +183,10 @@ $(function(){
     		
     	});
     	
+    	$(document).on( "click", ".hoxy", function(){
+    		alert("hoxy");
+    	});
+		
     });
 </script>
 	<p>
@@ -219,7 +223,6 @@ $(function(){
 							<tr>
 								<th style="width:30%; text-align:center; background:#ffffff;">영화관</th>
 								<th style="width:70%; text-align:center; background:#ffffff;">주소</th>
-								<th style="background:#ffffff;"></th>
 							</tr>
 						</thead>
 						<tbody id="showFindTable">
