@@ -7,23 +7,26 @@
 	String msg = (String)request.getAttribute("msg");
 	String url = (String)request.getAttribute("url");
 %>
-<script type="text/javascript">
-if (msg=="") {
-	alert("<%=msg%>");
-location.href = "<%=url%>";
-	}
-</script>
 <script>
 $(function(){
-	var idch = 0;
+	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+	var getPhone = /^\d{3}-\d{3,4}-\d{4}$/; //전화번호 유효성 검사
+	var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/); //아이디 유효성 검사
+	var idchk = 0;
 	$('#idChk').click(function () {
 	var id = $('#Id').val();
 		if(id=="") {
 			alert("아이디를 입력해주세요.")
 			return false;
 		}
+      if(!getCheck.test($("#Id").val())){
+          alert("영문 및 숫자 좋바으로 입력해주세요");
+          $("#Id").val("");
+          $("#Id").focus();
+          return false;
+        }
 		$.ajax({
-			url:'/Resource/action/idChk.do',				//요청할 주소 값
+			url:'/Resource/action/idChk.do',//요청할 주소 값
 			method : 'post',			// Get or Post
 			data : { 'id' : id },		// 서버에 넘길 Parameter (2개 이상은 배열)
 			success : function(data) {		// 응답 성공 시 값이 반환 되는 곳 (반환 된 값 = data)
@@ -42,13 +45,26 @@ $(function(){
  	$('#submit').click(function () {
 		var pw = $('#pw').val();
 		var pwchk  = $('#pwchk').val();
-		if(idch != 1 ) {
+		if(idchk != 1 ) {
 			alert("아이디 중복확인을 해주세요.");
 			return false;
 		}
 		if(pw != pwchk) {
 			alert("비밀번호가 일치하지 않습니다.");
+			return false;
 		}
+      if(!getMail.test($("#Email").val())){
+          alert("이메일형식에 맞게 입력해주세요")
+          $("#Email").val("");
+          $("#Email").focus();
+          return false;
+        }
+      if(!getPhone.test($("#Phone").val())){
+          alert("휴대폰 번호 형식에 맞게 입력해주세요")
+          $("#Phone").val("");
+          $("#Phone").focus();
+          return false;
+        }
 	})
 });
 </script>
@@ -65,9 +81,9 @@ $(function(){
 				</form>
 			</div>
 			<div class="w3l_sign_in_register">
-			<% if (!"".equals(id)) { %>
+			<% if (!"".equals(name)) { %>
 				<ul>
-					<li><b><%=id + "님 환영합니다."%></b></li>
+					<li><b><%=name + "님 환영합니다."%></b></li>
 					<li><a href="/Resource/action/loguot.do" data-toggle="modal" data-target="">로그아웃</a></li>
 				</ul>
 			<%} else {%>
@@ -111,7 +127,7 @@ $(function(){
 			</div>
 		</div>
 	</div>
-	<!--  아이디/비밀번호 찾기 -->
+<!--  아이디/비밀번호 찾기 -->
 	<div class="modal video-modal fade" id="myModalSearch" tabindex="-1" role="dialog" aria-labelledby="myModalSearch">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -154,7 +170,7 @@ $(function(){
 			</div>
 		</div>
 	</div>
-	<!-- //아이디/비밀번호 찾기  -->
+<!-- //아이디/비밀번호 찾기  -->
 	
 	<div class="modal video-modal fade" id="myModalJoin" tabindex="-1" role="dialog" aria-labelledby="myModal">
 		<div class="modal-dialog" role="document">
@@ -169,16 +185,16 @@ $(function(){
 							<div class="module form-module">
 							  <div class="toggle">
 							  </div>
-							  <!-- 회원가입 -->
+<!-- 회원가입 -->
  							  <div class="form">
 								<form action="/Resource/action/userRegProc.do" method="post">
 								아이디 <input type="text" id ="Id" name="Id" placeholder="Id" required="">
 								<input type="button" id="idChk" value="중복확인">
 								 비밀번호 <input type="password" id="pw" name="Password" placeholder="Password" required="">
 								 비밀번호 확인 <input type="password" id="pwchk"name="PasswordChk" placeholder="Password Check" required="">							 
-								 이름 <input type="text" name="name" placeholder="name" required="">							 
-								 이메일 <input type="email" name="Email" placeholder="Email Address" required="">
-								 휴대폰 <input type="text" name="Phone" placeholder="Phone Number" required="">
+								 이름 <input type="text" id="name" name="name" placeholder="name" required="">							 
+								 이메일 <input type="email" id="Email" name="Email" placeholder="Ex) Sample@movie.com" required="">
+								 휴대폰 <input type="text" id="Phone" name="Phone" placeholder="Ex) 010-1234-5678" required="">
 								  <input type="submit" id = "submit" value="회원가입">
 								</form>
 							  </div>
@@ -224,7 +240,11 @@ $(function(){
 							<li><a href="/info.do">영화정보</a></li>
 							<li><a href="/ranking.do">영화순위</a></li>
 							<li><a href="/grade.do">평점/리뷰</a></li>
-							<li><a href="/myMovie.do">나의영화</a></li>
+							<% if (id.equals("admin")) { %>
+								<li><a href="/Admin_users.do">회원관리</a></li>
+							<%} else {%>
+								<li><a href="/myMovie.do">나의영화</a></li> 
+							<% } %>
 						</ul>
 					</nav>
 				</div>

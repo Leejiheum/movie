@@ -11,7 +11,8 @@
 		REG_ID,
 		REG_DATE,
 		CHG_ID,
-		CHG_DATE
+		CHG_DATE,
+		MOVIECD		
 	FROM
 	   GRADE_TB
 	ORDER BY 

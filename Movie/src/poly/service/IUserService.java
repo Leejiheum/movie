@@ -8,7 +8,6 @@ public interface IUserService {
 	public int insertUserDTO(UserDTO uDTO) throws Exception;
 	public List<UserDTO> getUserList() throws Exception;
 	public UserDTO getUserDetail(String userNo) throws Exception;
-	public int deleteUserDTO(String userNo) throws Exception; //
 	public int updateUser(UserDTO uDTO) throws Exception;
 	public UserDTO getUserLogin(UserDTO uDTO) throws Exception;
 	public String getIdChk (UserDTO uDTO) throws Exception;

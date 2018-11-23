@@ -42,26 +42,7 @@
 		</div>
 
 		<div class="container">
-		<div class="bs-docs-example">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th style="width:100px; text-align:center;">순위</th>
-						<th style="text-align:center;">영화명</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td style="text-align:center;">1</td>
-						<td>Mark</td>
-					</tr>
-					<tr>
-						<td style="text-align:center;">2</td>
-						<td>Jacob</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<%@include file="/Resource/DailyBoxOffice.jsp" %>
 	</div>
 </div>
 <!-- //faq-banner -->

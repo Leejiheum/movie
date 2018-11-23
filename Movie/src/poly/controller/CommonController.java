@@ -30,8 +30,11 @@ import okhttp3.Response;
 import poly.dto.NoticeDTO;
 import poly.dto.GradeDTO;
 import poly.dto.SubmitDTO;
+import poly.dto.UserDTO;
+import poly.dto.CommonDTO;
 import poly.service.INoticeService;
 import poly.service.IGradeService;
+import poly.service.ICommonService;
 import poly.service.impl.GradeService;
 import poly.util.CmmUtil;
 
@@ -57,10 +60,10 @@ public class CommonController {
 	/*
 	 * 비즈니스 로직(중요 로직을 수행하기 위해 사용되는 서비스를 메모리에 적재(싱글톤패턴 적용됨)
 	 */
-	/*	@Resource(name = "CommonController")
-		private ICommonService CommonService;*/
 		@Resource(name = "GradeService")
 		private IGradeService gradeService;
+		@Resource(name = "CommonService")
+		private ICommonService commonService;
 	/*
 	 * 함수명 위의 value="notice/NoticeList" => /notice/NoticeList.do로 호출되는 url은 무조건 이
 	 * 함수가 실행된다. method=RequestMethod.GET => 폼 전송방법을 지정하는 것으로 get방식은 GET, post방식은
@@ -77,68 +80,37 @@ public class CommonController {
 
 		return "/index";
 	}
-/*	
-	@RequestMapping(value="/data" ,method=RequestMethod.POST)
-	public @ResponseBody List<Object> data() throws Exception{
-		Calendar cal = Calendar.getInstance();
-		cal.add(cal.DATE, +7);
-		StringBuilder urlBuilder = new StringBuilder("https://api.themoviedb.org/3/discover/movie?" 
-		+ "release_date.lte=" + cal.get(cal.YEAR) + "-" + (cal.get(cal.MONTH) + 1) + "-" + cal.get(cal.DATE)
-		+ "&page=1&include_video=true" + "&include_adult=true" + "&sort_by=release_date.desc" + "&language=kor" + "&api_key=d53fcd9c872e96c3a6bfff2eb19c85a6");
-		URL url = new URL(urlBuilder.toString());
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Content-type", "application/json");
-
-		BufferedReader rd;
-		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		}
-		else {
-			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-
-		}
-		String result = "";
-		String line;
-		while ((line = rd.readLine()) != null) {
-			result = result.concat(line);
-		}
-		rd.close();
-		conn.disconnect();
-		JSONParser parser = new JSONParser();
-		JSONObject movieinfo = (JSONObject) parser.parse(result);
-		JSONArray results = (JSONArray) movieinfo.get("results");
-		HashMap<String, String> hMap = null;
-		List<Object> oList = new ArrayList<>();
-		for (int i = 0; i < 12; i++) {
-			JSONObject data_obj = (JSONObject) results.get(i);
-			
-			hMap = new HashMap<>();
-			
-			String title = CmmUtil.nvl(data_obj.get("title").toString());
-			String popularity = CmmUtil.nvl(data_obj.get("popularity").toString());
-			String poster_path = "";
-			if (data_obj.get("poster_path") == null) {
-			}
-			else {
-				poster_path = CmmUtil.nvl(data_obj.get("poster_path").toString());
-			}
-			hMap.put("title", title);
-			hMap.put("popularity", popularity);
-			hMap.put("poster_path", poster_path);
-			oList.add(data_obj);
-			hMap = null;
-		}
-
-		
-		
-		
-		return oList;
-	}*/
  	
 	@RequestMapping(value = "cinema")
 	public String series(HttpServletRequest req, HttpServletResponse res, Model model, HttpSession session) throws Exception {
 		return "/cinema";
+	}
+	
+	@RequestMapping(value = "cienma/sidosearch", method=RequestMethod.POST)
+	public @ResponseBody List<CommonDTO> getsidosearch(HttpServletRequest req, HttpServletResponse res, Model model, HttpSession session) throws Exception {
+		String SIDO =req.getParameter("sido");
+		String SIGUNGU=req.getParameter("gugun");
+		CommonDTO cDTO = new CommonDTO();
+		cDTO.setSIDO(SIDO);
+		if (SIGUNGU.equals("전체")) {
+			cDTO.setSIGUNGU("");	
+		} else {
+			cDTO.setSIGUNGU(SIGUNGU);
+		}
+		List<CommonDTO> cList = new ArrayList<>();
+		cList = commonService.getCinemaList(cDTO);
+		/*model.addAttribute("cList", cList);*/
+		return cList;
+	}
+	@RequestMapping(value = "cienma/sidosearchDetail", method=RequestMethod.POST)
+	public  @ResponseBody List<CommonDTO> sidosearchDetail(HttpServletRequest req, HttpServletResponse res, Model model, HttpSession session) throws Exception {
+		String no =req.getParameter("no");
+		System.out.println("no :" + no);
+		CommonDTO cDTO = new CommonDTO();
+		cDTO.setNO(no);
+		List<CommonDTO> chList = new ArrayList<>();
+		chList = commonService.getCinemaListDetail_1(cDTO);
+		return chList;
 	}
 
 	@RequestMapping(value = "info")

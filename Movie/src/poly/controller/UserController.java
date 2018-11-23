@@ -41,13 +41,22 @@ public class UserController {
 		//만약 비밀번호나 아이디가 일치 하지 않으면 NULL를 반환한다.
 		
 		uDTO = userService.getUserLogin(uDTO);
-		if(uDTO == null) {
-			//로그인 실패
-			String msg = "로그인에 실패하셨습니다..";
-			String url = "/index.do";
+		String msg ="";
+		String url ="";
+		if(uDTO.getUSER_ACTIVE().equals("1")) {
+			msg = "사용이 정지된 아이디 입니다.";
+			url = "/index.do";
 			model.addAttribute("msg", msg);
 			model.addAttribute("url", url);
-			return "Resource/index";
+			return "/alert";
+		}
+		else if(uDTO == null) {
+			//로그인 실패
+			msg = "로그인에 실패하셨습니다.";
+			url = "/index.do";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			return "/alert";
 		} else {
 			//로그인 성공
 			session.setAttribute("id", uDTO.getUSER_ID());
@@ -67,11 +76,6 @@ public class UserController {
 		String name = request.getParameter("name");
 		String email = request.getParameter("Email");
 		String phone = request.getParameter("Phone");
-		log.info(id);
-		log.info(password);
-		log.info(name);
-		log.info(email);
-		log.info(phone);
 
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUSER_ID(id);
@@ -126,9 +130,6 @@ public class UserController {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("Phone");
-		System.out.println("ID :" + id);
-		System.out.println("name :" + name);
-		System.out.println("phone :" + phone);
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUSER_ID(CmmUtil.nvl(id));
 		uDTO.setUSER_NAME(CmmUtil.nvl(name));

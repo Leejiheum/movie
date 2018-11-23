@@ -14,7 +14,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!-- <link href="/Resource/css/table-style.css" rel='stylesheet' type='text/css' /> -->
 <%
-DateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
+DateFormat sdFormat = new SimpleDateFormat("yyyyMM18");
 Date date = new Date();
 String Dt = sdFormat.format(date);
 	//파라메터 설정

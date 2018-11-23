@@ -31,12 +31,7 @@ public class UserService implements IUserService {
 
 		return userMapper.getUserDetail(userNo);
 	}
-
-	@Override
-	public int deleteUserDTO(String userNo) throws Exception {
-		return userMapper.deleteUserDTO(userNo);
-	}
-
+	
 	@Override
 	public int updateUser(UserDTO uDTO) throws Exception {
 		return userMapper.updateUser(uDTO);

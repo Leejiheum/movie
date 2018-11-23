@@ -8,5 +8,6 @@
 		<typeAlias type="poly.dto.UserDTO" alias="UserDTO"/>
 		<typeAlias type="poly.dto.SubmitDTO" alias="SubmitDTO"/>
 		<typeAlias type="poly.dto.GradeDTO" alias="GradeDTO"/>
+		<typeAlias type="poly.dto.CommonDTO" alias="CommonDTO"/>
     </typeAliases>
 </configuration>
